@@ -1,0 +1,10 @@
+body {
+    text-align: center;
+    background-image: "./images/amogUsBackground.jpg";
+    background-size: auto;
+}
+
+canvas {
+    border: 1px solid green;
+    background-color: black;
+}
