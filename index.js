@@ -4,7 +4,40 @@ const context = canvas.getContext('2d');
 let obstacles = [];
 let animationId;
 let gameOver = false;
+let currentLevel = 1;
+const myMusic = new Audio('./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music).mp3');
+let myPlayer;
 
+ 
+
+document.getElementById('start-button').onclick = () => {
+    document.getElementById('game-board').style.display = 'block';
+    myPlayer = new Player();
+    updateCanvas();
+    createObstacles();
+      //createObstacles2();
+    HitWall();
+    myMusic.loop = true;
+    myMusic.play()
+}
+/*
+class music {
+    constructor() {
+        this.music = document.createElement('audio');
+        this.music.src = './music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music).mp3';
+        this.music.setAttribute('preload', 'auto');
+        this.music.setAttribute('controls', 'none');
+        this.music.style.display = 'none';
+        document.body.appendChild(this.music);
+        this.play = function () {
+            this.music.play();
+        };
+        this.stop = function () {
+            this.music.pause();
+        };
+    }
+}
+*/
 function createObstacles() {
     obstacles.push(new Obstacle(470, 250, 20, 200));
     obstacles.push(new Obstacle(420, 185, 20, 150));
@@ -59,8 +92,38 @@ function createObstacles() {
     
 }
 
-const myPlayer = new Player;
-createObstacles();
+function createObstacles2() {
+    obstacles.push(new Obstacle(0, 0, 10, 240));
+    obstacles.push(new Obstacle(0, 260, 10, 250));
+    obstacles.push(new Obstacle(0, 0, 500, 10));
+    obstacles.push(new Obstacle(490, 0, 10, 240));
+    obstacles.push(new Obstacle(490, 260, 10, 250));
+    obstacles.push(new Obstacle(0, 490, 490, 10));
+
+    obstacles.push(new Obstacle(30, 30, 10, 50));
+    obstacles.push(new Obstacle(30, 30, 30, 10));
+    obstacles.push(new Obstacle(30, 30, 10, 80));
+    obstacles.push(new Obstacle(30, 100, 10, 60));
+    obstacles.push(new Obstacle(30, 180, 10, 150));
+    obstacles.push(new Obstacle(30, 350, 10, 60));
+    obstacles.push(new Obstacle(30, 430, 10, 40))
+
+    obstacles.push(new Obstacle(60, 30, 10, 100));
+
+    obstacles.push(new Obstacle(70, 120, 90, 10));
+    obstacles.push(new Obstacle(70, 150, 10, 90));
+    obstacles.push(new Obstacle(70, 240, 90, 10));
+    obstacles.push(new Obstacle(90, 30, 10, 80));
+    obstacles.push(new Obstacle(90, 30, 50, 10));
+    obstacles.push(new Obstacle(120, 50, 10, 50));
+    obstacles.push(new Obstacle(120, 50, 70, 10));
+    obstacles.push(new Obstacle(140, 0, 10, 40));
+    
+}
+
+
+
+
 
 
 function updateCanvas() {
@@ -72,11 +135,14 @@ function updateCanvas() {
     if (!gameOver) {
         animationId = requestAnimationFrame(updateCanvas);
     }
-    
+
+    if (currentLevel === 1) {
+        createObstacles();
+    } else if (currentLevel === 2) {
+        createObstacles2();
+    }
+     
     endGame();
-    
-    const div = document.getElementById('div');
-    div.innerHTML = 'Congratulations!';
     
 }
 
@@ -130,17 +196,29 @@ function detectCollision(obstacle) {
  }
 
 function endGame(){
-    if((myPlayer.x === 495) &&
-    (myPlayer.y === 35) &&
-    (myPlayer.width === 10) &&
-    (myPlayer.height === 10)) {
+    if((myPlayer.x > 495) &&
+    (myPlayer.y === 35)) {
+    // (myPlayer.width === 10) &&
+    // (myPlayer.height === 10)) 
 
-        cancelAnimationFrame(animationId);
-        gameOver = true;
+        //cancelAnimationFrame(animationId);
+        //gameOver = true;
+        currentLevel = 2;
         alert('GG bruh');
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        obstacles = [];
+        myPlayer.x = 0;
+        myPlayer.y = 245;
     }
+
+    if((myPlayer.x > 495) &&
+     (myPlayer.y === 245)) {
+         cancelAnimationFrame(animationId);
+         gameOver = true;
+         alert('GG bruh')
+     }
 
     
 }
 
-updateCanvas();
+

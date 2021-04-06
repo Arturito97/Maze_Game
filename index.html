@@ -8,9 +8,18 @@
     <title>1st_Project</title>
 </head>
 <body>
-    <audio id="audio" src="./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music).mp3"></audio>
-    <canvas id="maze" width="500" height="500"></canvas>
-    <div id="div"></div> 
+    <!-- <audio id="audio" src="./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music).mp3"></audio> -->
+    <div id="game-intro"> 
+        <p>Welcome to the Puzzle game!</p>
+        <p>This game is trying to be like AmongUs (although it's not even close 😅)</p>
+        <button id="start-button"> Let's begin!</button>
+    </div>
+   
+    <div id="game-board">
+        <canvas id="maze" width="500" height="500"></canvas> 
+    </div>
+
+    
     <script src="Obstacle.js"></script>
     <script src="Player.js"></script>
     <script src="index.js"></script>
