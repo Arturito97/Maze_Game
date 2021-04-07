@@ -8,6 +8,8 @@ let currentLevel = 1;
 const myMusic = new Audio('./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music) - Copy.mp3');
 const myMusic2 = new Audio('./music/Celebrate Good Times... Come on!!!.mp3');
 let myPlayer;
+let num = 90;
+
 document.getElementById('p').style.display = 'none';
 document.getElementById('p2').style.display = 'none';
 document.getElementById('p3').style.display = 'none';
@@ -15,13 +17,23 @@ document.getElementById('p3').style.display = 'none';
 document.getElementById('start-button').onclick = () => {
     document.getElementById('game-intro').style.display = 'none';
     document.getElementById('game-board').style.display = 'block';
+
+    let x = setInterval(function() {
+        num--;
+        document.getElementById('p4').innerHTML = `${num}`;
+        if(num < 0) {
+            clearInterval(x);
+            document.getElementById('p4').innerHTML= "FAILED"
+        }
+    }, 1000);
+    
     myPlayer = new Player();
     updateCanvas();
     createObstacles();
       //createObstacles2();
     HitWall();
     myMusic.loop = true;
-    myMusic.play()
+    myMusic.play();
 }
 /*
 class music {
@@ -266,6 +278,7 @@ function updateCanvas() {
     endGame();
     
 }
+
 
 
 
