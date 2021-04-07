@@ -23,7 +23,9 @@ class Player {
     }
 
     left() {
-        this.x -= 5;      
+        if (this.x > 0) {
+            this.x -= 5;     
+        }
     }
 
     right() {
