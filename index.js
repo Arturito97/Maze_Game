@@ -7,23 +7,42 @@ let gameOver = false;
 let currentLevel = 1;
 const myMusic = new Audio('./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music) - Copy.mp3');
 const myMusic2 = new Audio('./music/Celebrate Good Times... Come on!!!.mp3');
+const myAudio = new Audio ('./music/Roblox Death Sound - Sound Effect (HD).mp3')
 let myPlayer;
 let num = 90;
+let x;
 
-document.getElementById('p').style.display = 'none';
-document.getElementById('p2').style.display = 'none';
-document.getElementById('p3').style.display = 'none';
+document.getElementById('won').style.display = 'none';
+document.getElementById('lost').style.display = 'none';
+
+
+document.getElementById('restart-button').onclick = () => {
+    location.reload();
+}
+
+document.getElementById('restart').onclick = () => {
+    location.reload();
+}
 
 document.getElementById('start-button').onclick = () => {
     document.getElementById('game-intro').style.display = 'none';
     document.getElementById('game-board').style.display = 'block';
 
-    let x = setInterval(function() {
+    x = setInterval(function() {
         num--;
-        document.getElementById('p4').innerHTML = `${num}`;
+        document.getElementById('p').innerHTML = `${num}`;
         if(num < 0) {
             clearInterval(x);
-            document.getElementById('p4').innerHTML= "FAILED"
+            document.getElementById('game-board').style.display = 'none';
+            cancelAnimationFrame(animationId);
+            gameOver = true;
+            document.getElementById('p').style.display = 'none';
+            myMusic.pause();
+            myAudio.play();
+            document.getElementById('lost').style.display = 'block';
+          //you lose
+          //mostrar restart
+     
         }
     }, 1000);
     
@@ -35,6 +54,7 @@ document.getElementById('start-button').onclick = () => {
     myMusic.loop = true;
     myMusic.play();
 }
+
 /*
 class music {
     constructor() {
@@ -53,6 +73,7 @@ class music {
     }
 }
 */
+
 function createObstacles() {
     obstacles.push(new Obstacle(470, 250, 20, 200));
     obstacles.push(new Obstacle(420, 185, 20, 150));
@@ -256,10 +277,8 @@ function createObstacles2() {
 
 
 
-
-
-
 function updateCanvas() {
+
     obstacles.forEach((obstacle) => {
         obstacle.draw();
     })
@@ -314,6 +333,18 @@ document.addEventListener('keydown', (e) => {
     myPlayer.draw();  
 })
 
+// function timeOut() {
+//     if(num < 0) {
+//         setInterval();
+//         clearInterval(x);
+//         document.getElementById('game-board').style.display = 'none';
+//         document.getElementById('p').style.color = 'red';
+//         document.getElementById('p').innerHTML = 'YOU FOOL!';
+//     }
+//
+// }
+
+
 function HitWall() {
     let hitObstacle = false;
     hitObstacle = obstacles.some((obstacle) => {
@@ -322,12 +353,14 @@ function HitWall() {
     return hitObstacle;
 } //se o hitobstacle detetar um obstaculo a sua frente, retorna o obstaculo
 
+
 function detectCollision(obstacle) {
     return !((myPlayer.x > obstacle.x + obstacle.width) ||  //player está mais a direita
      (myPlayer.x + myPlayer.width < obstacle.x )||  //player está mais a esquerda
      (myPlayer.y > obstacle.y + obstacle.height) || //player está mais a baixo
     (myPlayer.y + myPlayer.height < obstacle.y))  //player está em cima
 }
+
 
 function endGame(){
     if((myPlayer.x > 495) &&
@@ -338,7 +371,7 @@ function endGame(){
         //cancelAnimationFrame(animationId);
         //gameOver = true;
         currentLevel = 2;
-        alert('Easy, right? Try this one now 😉');
+        alert('Easy peasy! But can you do this?');
         context.clearRect(0, 0, canvas.width, canvas.height);
         obstacles = [];
         myPlayer.x = 0;
@@ -352,15 +385,16 @@ function endGame(){
 
     if((myPlayer.x > 495) &&
      (myPlayer.y === 245)) {
+
          cancelAnimationFrame(animationId);
          gameOver = true;
          alert('Well done!');
          document.getElementById('game-board').style.display = 'none';
+         document.getElementById('p').style.display = 'none';
          myMusic.pause();
-         document.getElementById('p').style.display = 'block';
-         document.getElementById('p2').style.display = 'block';
-         document.getElementById('p3').style.display = 'block';
+         document.getElementById('won').style.display = 'block';
          myMusic2.play();
+         clearTimeout(x);
 
           
      }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>1st_Project</title>
+    <title>Maze Game</title>
 </head>
 <body>
     <!-- <audio id="audio" src="./music/Among Us Drip Theme Song Original (Among Us Trap Remix - Amogus Meme Music).mp3"></audio> -->
@@ -14,11 +14,23 @@
         <p>This game is trying to be like AmongUs (although it's not even close 😅)</p>
         <button id="start-button"> Let's begin!</button>
     </div>
-   
-    <p id='p'>Congratulations!!!</p>
-    <p id='p2'>You won nothing! But thanks for playing! ♥</p>
-    <p id='p3'><img src="./images/am0ngsusxh-36.gif" alt="celebrating"></p>
-    <p id='p4'></p>
+    <div id='won'>
+        <p>Congratulations!!!</p>
+        <p>You won nothing! But thanks for playing! ♥</p>
+        <p><img src="./images/am0ngsusxh-36.gif" alt="celebrating"></p>
+        <p>Want to try again?</p>
+        <p id='button'><button><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyVEVO">Yes</a></button><button id='restart'>No</button</p>
+    </div>
+    <div id="lost">
+        <p style='color: red'>YOU FOOL</p>
+        <p>Don't worry too much...</p>
+        <p><i>"Believe that you can do it. See it in your mind. See it finished before you ever start."</i> - Bob Ross (1986)</p>
+        <p><button id='restart-button'>Try Again</button></p>
+    </div>
+
+        <p id="p"></p>
+
+
     <div id="game-board">
         <canvas id="maze" width="500" height="500"></canvas> 
     </div>
